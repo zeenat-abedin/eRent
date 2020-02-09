@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { auth } from "../../firebase/util";
+import { clearCurrentUser } from "../../redux/actions/userAction";
 
 const Navbar = ({ history }) => {
   const currentUser = useSelector(state => state.users.currentUser);
-
+  const dispatch = useDispatch()
   return (
     <nav className="navbar navbar-light bg-light navbar-expand-md">
       <Link className="navbar-brand" to="/">
@@ -31,6 +32,7 @@ const Navbar = ({ history }) => {
                 onClick={() => {
                   auth.signOut();
                   localStorage.clear("user");
+                  dispatch(clearCurrentUser())
                   history.push("/auth");
                 }}
                 className="nav-link m-0"
@@ -38,10 +40,10 @@ const Navbar = ({ history }) => {
                 Logout
               </p>
             ) : (
-              <Link className="nav-link" to="/auth">
-                Login
+                <Link className="nav-link" to="/auth">
+                  Login
               </Link>
-            )}
+              )}
           </li>
         </ul>
       </div>

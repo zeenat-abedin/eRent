@@ -1,14 +1,14 @@
-import { createStore } from "redux";
-import reducers from "./reducers";
+import { createStore, applyMiddleware, compose } from "redux";
 
+import reducers from "./reducers";
+import thunk from "redux-thunk";
 
 let store;
 if (process.env.NODE_ENV === "development") {
-    store = createStore(
-        reducers,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 } else {
-    store = createStore(reducers);
+  store = createStore(reducers, applyMiddleware(thunk));
 }
-export default store
+export default store;

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+
 import Input from "../shared/Input";
-import { auth, createUserProfileDocument } from "../../firebase/util";
+import {
+  auth,
+  createUserProfileDocument,
+  getUserDetails
+} from "../../firebase/util";
+import axios from "../../config/axios";
 
 const Register = () => {
   const [check, setCheck] = useState(false);
@@ -36,9 +42,20 @@ const Register = () => {
         phone
       });
 
+      const data = await createdUser.get();
+      console.log(data);
+
       //  TODO-  get userDetails from firestore and save into postgres database
-      createdUser = await createdUser.get();
-      console.log(createdUser.data());
+      const userDetails = await getUserDetails(user);
+
+      const response = await axios.post("/auth", {
+        displayName,
+        email,
+        phone,
+        userId: user.uid
+      });
+
+      alert(response.data.message);
 
       setUser({
         displayName: "",
@@ -48,7 +65,7 @@ const Register = () => {
         confirmPassword: ""
       });
     } catch (error) {
-      console.error(error);
+      alert(error.message);
     }
   };
   const { displayName, email, phone, password, confirmPassword } = user;
