@@ -1,0 +1,20 @@
+{
+  "editor.detectIndentation": false, // for indentation
+  "editor.tabCompletion": "on", // auto tab
+  "editor.tabSize": 2, // tab size
+  "editor.trimAutoWhitespace": true,
+  "editor.formatOnSave": true, // auto format after save
+  "editor.formatOnPaste": true, // same after paste
+  "files.exclude": {
+    // will hide these files/folder in vs code
+    "**/.DS_Store": true,
+    "**/.git": false,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/node_modules": true,
+    "dist": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true
+}
