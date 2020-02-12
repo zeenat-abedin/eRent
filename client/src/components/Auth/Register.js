@@ -133,8 +133,8 @@ const Register = () => {
         {check ? (
           <i className="fas fa-check-square fa-1x"></i>
         ) : (
-          <i className="far fa-check-square fa-1x"></i>
-        )}
+            <i className="far fa-check-square fa-1x"></i>
+          )}
 
         <span className="rm-pass ml-2" onClick={() => setCheck(!check)}>
           I agree to the terms and condition

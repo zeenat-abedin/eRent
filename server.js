@@ -15,10 +15,10 @@ app.use("/auth", userRouter);
 // DB Connection
 sequelize
   .sync()
-  .then(function(err) {
+  .then(function (err) {
     console.log("Connection has been established successfully.");
   })
-  .catch(function(err) {
+  .catch(function (err) {
     console.log("Unable to connect to the database:", err.message);
   });
 

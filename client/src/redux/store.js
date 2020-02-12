@@ -11,4 +11,7 @@ if (process.env.NODE_ENV === "development") {
 } else {
   store = createStore(reducers, applyMiddleware(thunk));
 }
-export default store;
+let mapDispatchToProps = (state) => {
+  return state
+}
+export { store, mapDispatchToProps };

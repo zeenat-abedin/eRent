@@ -1,0 +1,33 @@
+.logo{
+  font-family: Yatra One, cursive;
+  font-size: 32px;
+}
+.nav-text{
+  color: white !important;
+  font-family: "Roboto"
+}
+.nav-text:hover{
+  color:orange !important;
+}
+.nav-link{
+   color:white !important
+ }
+ .nav-link:hover{
+   color:orange!important
+ }
+.button-text:hover{
+  font-weight: 400;
+  transform: scale(1.1);
+  transition-duration: 0.3s;
+  transition-property: transform;
+  color:black!important
+}
+@media only screen and (max-width: 990px){
+ .button-text{
+  width: 100px;
+  margin-top: 6px;
+ }
+ .dropDown{
+   width: 30px;
+ }
+}
