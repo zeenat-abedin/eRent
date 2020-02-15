@@ -10,7 +10,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ccc;
+  // background-color: #ccc;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+#root {
+  height: 100%;
 }
 
 *:focus {

@@ -1,0 +1,61 @@
+footer {
+  padding: 2rem 0 !important;
+  background-color: #000 !important;
+}
+​ .icon {
+  display: inline-block !important;
+  height: 50px !important;
+  width: 50px !important;
+  background: linear-gradient(
+    to right bottom,
+    rgb(105, 142, 148),
+    rgb(5, 50, 58)
+  ) !important;
+  margin-right: 1rem !important;
+  border-radius: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+​ .icon i.fab {
+  color: #fff !important !important;
+  font-size: 18px !important;
+}
+​ .bottom {
+  border-top: 1px solid #ccc !important;
+}
+​ .about-us h4 {
+  color: rgb(105, 142, 148) !important;
+}
+​ .contact-us i.fas {
+  color: rgb(105, 142, 148) !important;
+}
+​ .information h4,
+.helpful-links h4,
+.subscribe h4 {
+  color: rgb(105, 142, 148) !important;
+}
+​ ul li {
+  list-style: none !important;
+  font-size: 1.2rem !important;
+  color: #fff !important;
+}
+​input.subscibe-input {
+  display: block !important;
+  padding: 5px 8px !important;
+  border-radius: 5px !important;
+  border: none !important;
+}
+​ .subscribe-button {
+  background: linear-gradient(
+    to right bottom,
+    rgb(105, 142, 148),
+    rgb(5, 50, 58)
+  ) !important;
+  border: none !important;
+  color: #fff !important;
+  padding: 5px 20px !important;
+  border-radius: 5px !important;
+  margin-top: 1rem !important;
+}

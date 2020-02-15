@@ -5,7 +5,7 @@ import { clearCurrentUser } from "../../redux/actions/userAction";
 import { withRouter } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import './Navbar.scss'
-const NavBar = ({ Color }) => {
+const NavBar = ({ Color, history }) => {
   const currentUser = useSelector(state => state.users.currentUser);
   const dispatch = useDispatch()
   return (
@@ -25,7 +25,7 @@ const NavBar = ({ Color }) => {
                   {currentUser || localStorage.getItem("user") ? (
                     <div
                     >
-                      <NavDropdown.Item href="/logout" onClick={() => {
+                      <NavDropdown.Item  onClick={() => {
                         auth.signOut();
                         localStorage.clear("user");
                         dispatch(clearCurrentUser())
