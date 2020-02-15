@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+require('dotenv').config()
 var upload = require('../config/multer')
 const path = require('path')
 const bodyParser = require('body-parser')
@@ -67,7 +68,7 @@ router.post('/addProduct', uploadImages, async (req, res, next) => {
         service: 'gmail',
         auth: {
           user: "darisanikhila@gmail.com", // generated ethereal user
-          pass: "rohithdarisa"// generated ethereal password
+          pass: process.env.GMAIL_PASS// generated ethereal password
         },
         tls: {
           // do not fail on invalid certs

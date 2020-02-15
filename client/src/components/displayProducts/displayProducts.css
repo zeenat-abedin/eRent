@@ -8,6 +8,7 @@ body{
   color: var(--mainDark);
 }
 
+
 .wrap-product{
     margin: auto;
     padding: 75px 30px 0;
@@ -60,8 +61,12 @@ body{
     border-top-left-radius: calc(.25rem - 1px);
     border-top-right-radius: calc(.25rem - 1px);
 }
+.card:hover {
+  border: 0.04rem solid rgba(0,0,0,0.2);
+  box-shadow:2px 1px 5px 2px rgba(0,0,0,0.2);
+}
 .footer-data{
-      /* background: white; */
+      background: white;
       /* border-top:none */
 }
 @media only screen and (max-width: 1024px){

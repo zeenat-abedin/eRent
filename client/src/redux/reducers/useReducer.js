@@ -26,7 +26,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
         products: result
       }
     case GET_PRODUCTS:
-      console.log("recent", payload)
       return {
         ...state,
         products: payload

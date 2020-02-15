@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
 const sequelize = require("./config/db");
+
 //seller product database
 const productSequelize = require('./config/productsDb')
 const userRouter = require("./routes/users");

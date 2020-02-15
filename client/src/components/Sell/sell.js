@@ -4,10 +4,9 @@ import { RegionDropdown, } from 'react-country-region-selector';
 import { POST_PRODUCT } from '../../redux/actions/actionType'
 import { connect } from 'react-redux'
 import axios from '../../config/axios'
-import { mapDispatchToProps } from '../../redux/store'
 import { useDispatch } from 'react-redux'
 import './sell.scss'
-function Sell(props) {
+function Sell() {
   const fileInput = useRef(null)
   const dispatch = useDispatch()
   const [productDetails, setDetails] = useState({
@@ -294,7 +293,7 @@ function Sell(props) {
   const submitProductForm = (e) => {
     e.preventDefault()
     if (formValidation()) {
-      // e.target.reset()
+      e.target.reset()
       let product = Object.assign(details, location);
       const headers = {
         "Content-Type": "form-data"
@@ -608,4 +607,4 @@ function Sell(props) {
   )
 }
 
-export default connect(mapDispatchToProps)(Sell)
+export default Sell
