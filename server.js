@@ -3,17 +3,28 @@ const cors = require("cors");
 
 const app = express();
 const sequelize = require("./config/db");
-
+//seller product database
+const productSequelize = require('./config/productsDb')
 const userRouter = require("./routes/users");
-const productsRouter = require("./routes/products")
+const productsRouter = require("./routes/createProducts")
+const fetchProducts = require("./routes/getProducts")
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use("/auth", userRouter);
-
-app.use("/products", productsRouter)
+//create products
+app.use("/createProduct", productsRouter)
+//get products
+app.use("/Products", fetchProducts)
 // DB Connection
+productSequelize
+  .sync()
+  .then(function (err) {
+    console.log("Connection has been established successfully for seller DB.");
+  })
+  .catch(function (err) {
+    console.log("Unable to connect to the seller database:", err.message);
+  });
 sequelize
   .sync()
   .then(function (err) {

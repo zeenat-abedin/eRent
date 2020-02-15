@@ -1,0 +1,71 @@
+:root{
+  --mainWhite:#f3f3f3;
+  --mainDark:#232528;
+}
+body{
+  font-family: 'Oswald', sans-serif;
+  background: var(--mainWhite);
+  color: var(--mainDark);
+}
+
+.wrap-product{
+    margin: auto;
+    padding: 75px 30px 0;
+    margin-bottom:30px;
+}
+.img-content{
+    width: 100% !important;
+    height: 245px !important;
+}
+.userlike{
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top:10%;
+  right:0%;
+  width:70px;
+  height: 100%;
+  background-color: none!important
+}
+.userlike:hover{
+  opacity: 1;
+  margin-left: 10%;
+  transition: 0.5s
+}
+.userlike .fa{
+  cursor: pointer;
+   border-radius: 10%;
+   background-color:#fff;
+  color:#000;
+  height:35px;
+  width:35px;
+  font-size:20px;
+  padding:7px;
+  margin:5%;
+  margin-top:3px;
+  margin-bottom:5%;
+}
+.userlike .btn-secondary{
+  background: transparent;
+  border:none
+}
+.product{
+  margin-bottom: 30px;
+}
+
+.price{
+      float: right;
+}
+.card-img-top {
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+}
+.footer-data{
+      /* background: white; */
+      /* border-top:none */
+}
+@media only screen and (max-width: 1024px){
+.userlike{
+  opacity: 1;
+}
+}

@@ -9,9 +9,9 @@ import { store } from './redux/store';
 import './index.scss';
 
 ReactDOM.render(<Provider store={store}>
-  <Router>
-    <App />
-  </Router>
+    <Router>
+        <App />
+    </Router>
 
 </Provider>, document.getElementById('root'));
 
