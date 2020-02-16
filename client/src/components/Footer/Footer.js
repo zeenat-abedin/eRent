@@ -8,9 +8,9 @@ const Footer = () => {
       <div className="container-fluid">
         {/* Top */}
         <div className="row">
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-md-6 col-lg-3 text-center text-md-left">
             <div className="tagline pb-3">
-              <h3 className=" m-0">eRent</h3>
+              <h3 className="m-0">eRent</h3>
               <p className="m-0 text-white">Landmark living on the avenue.</p>
             </div>
             <div className="pb-3 aboutus">
@@ -18,7 +18,6 @@ const Footer = () => {
               <p className="m-0 text-white">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
                 nobis.
-
               </p>
             </div>
             <div className="contact-us pb-3">
@@ -32,7 +31,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
+          <div className="col-12 col-md-6 col-lg-3 text-center text-md-left d-flex justify-content-center justify-content-md-start">
             <div className="information">
               <h4>Information</h4>
               <ul>
@@ -44,7 +43,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-md-6 col-lg-3 text-center text-md-left">
             <div className="helpful-links">
               <h4>Helpful Links</h4>
               <ul>
@@ -55,7 +54,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-3 d-flex align-self-center">
+          <div className="col-12 col-md-6 col-lg-3 text-center text-md-left d-flex align-md-self-center align-items-center justify-content-center justify-content-md-start  pb-3">
             <div className="subscribe">
               <h4>Subscribe Info</h4>
               <input
@@ -73,9 +72,9 @@ const Footer = () => {
       <div className="container-fluid">
         {/* bottom */}
         <div className={`row pt-4 ${"bottom"}`}>
-          <div className="col-6 col-md-2"></div>
+          <div className="col-12 col-md-2"></div>
           {/* icons */}
-          <div className="col-6 col-md-6 d-flex justify-content-center">
+          <div className="col-12 col-md-6 d-flex justify-content-center pb-3 pb-md-0">
             <span className={"icon"}>
               <i className="fab fa-facebook-f"></i>
             </span>
@@ -90,8 +89,8 @@ const Footer = () => {
             </span>
           </div>
           {/* copyright */}
-          <div className="col-6 col-md-4 d-flex align-items-center">
-            <p className="m-0 text-white">
+          <div className="col-12 col-md-4 d-flex align-items-center justify-content-center">
+            <p className="m-0 text-white ">
               2020 &copy; eRent | All right Reserved.
             </p>
           </div>

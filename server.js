@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-const app = experss();
+const app = express();
 
 const sequelize = require("./config/db");
 
@@ -19,14 +19,14 @@ app.use("/createProduct", productsRouter)
 //get products
 app.use("/Products", fetchProducts)
 // DB Connection
-productSequelize
-  .sync()
-  .then(function (err) {
-    console.log("Connection has been established successfully for seller DB.");
-  })
-  .catch(function (err) {
-    console.log("Unable to connect to the seller database:", err.message);
-  });
+// productSequelize
+//   .sync()
+//   .then(function (err) {
+//     console.log("Connection has been established successfully for seller DB.");
+//   })
+//   .catch(function (err) {
+//     console.log("Unable to connect to the seller database:", err.message);
+//   });
 sequelize
   .sync()
   .then(function (err) {
