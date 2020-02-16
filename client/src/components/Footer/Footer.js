@@ -4,29 +4,30 @@ import "./Footer.scss";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className={"footer"}>
       <div className="container-fluid">
         {/* Top */}
         <div className="row">
           <div className="col-12 col-md-6 col-lg-3">
-            <div className="slogan pb-3">
-              <h3 className="text-white m-0">eRent</h3>
-              <p className="m-0 text-white">Tagline here</p>
+            <div className="tagline pb-3">
+              <h3 className=" m-0">eRent</h3>
+              <p className="m-0 text-white">Landmark living on the avenue.</p>
             </div>
-            <div className="about-us pb-3">
+            <div className="pb-3 aboutus">
               <h4 className="m-0">About us</h4>
               <p className="m-0 text-white">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
                 nobis.
+
               </p>
             </div>
             <div className="contact-us pb-3">
               <p className="m-0">
-                <i className="fas fa-phone-alt pr-3"></i>{" "}
+                <i className="fas contact-icon fa-phone-alt pr-3"></i>{" "}
                 <span className="text-white"> +91 0123456789</span>
               </p>
               <p className="m-0">
-                <i className="fas fa-envelope pr-3"></i>{" "}
+                <i className="fas contact-icon fa-envelope pr-3"></i>{" "}
                 <span className="text-white"> erent@gmail.com</span>
               </p>
             </div>
@@ -71,20 +72,20 @@ const Footer = () => {
       </div>
       <div className="container-fluid">
         {/* bottom */}
-        <div className="row bottom pt-4">
+        <div className={`row pt-4 ${"bottom"}`}>
           <div className="col-6 col-md-2"></div>
           {/* icons */}
           <div className="col-6 col-md-6 d-flex justify-content-center">
-            <span className="icon">
+            <span className={"icon"}>
               <i className="fab fa-facebook-f"></i>
             </span>
-            <span className="icon">
+            <span className={"icon"}>
               <i className="fab fa-google-plus-g"></i>
             </span>
-            <span className="icon">
+            <span className={"icon"}>
               <i className="fab fa-twitter"></i>
             </span>
-            <span className="icon">
+            <span className={"icon"}>
               <i className="fab fa-instagram"></i>
             </span>
           </div>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useAlert } from 'react-alert'
+
 import Input from "../shared/Input";
 import { auth } from "../../firebase/util";
 
 const Login = () => {
+  const alert = useAlert()
   const [user, setUser] = useState({
     email: "",
     password: ""
@@ -20,6 +23,7 @@ const Login = () => {
       await auth.signInWithEmailAndPassword(email, password);
     } catch (error) {
       console.log(error);
+      alert.show(error.message)
     }
   };
   const { email, password } = user;

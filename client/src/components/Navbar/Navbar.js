@@ -25,7 +25,7 @@ const NavBar = ({ Color, history }) => {
                   {currentUser || localStorage.getItem("user") ? (
                     <div
                     >
-                      <NavDropdown.Item  onClick={() => {
+                      <NavDropdown.Item onClick={() => {
                         auth.signOut();
                         localStorage.clear("user");
                         dispatch(clearCurrentUser())
@@ -37,7 +37,7 @@ const NavBar = ({ Color, history }) => {
                 </NavDropdown>
               </div>
             ) : (
-                <Nav.Link href="/logout" className="btn btn-outline-light nav-text button-text mr-2"> Login</Nav.Link>
+                <Nav.Link href='/auth' className="btn btn-outline-light nav-text button-text mr-2"> Login</Nav.Link>
               )}
             <Nav.Link href="/sellProduct" className="btn btn-outline-light button-text nav-text mr-3">Sell Product</Nav.Link>
           </Nav>

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useAlert } from 'react-alert'
+
 
 import Input from "../shared/Input";
 import {
@@ -9,6 +11,7 @@ import {
 import axios from "../../config/axios";
 
 const Register = () => {
+  const alert = useAlert()
   const [check, setCheck] = useState(false);
   const [user, setUser] = useState({
     displayName: "",
@@ -55,7 +58,8 @@ const Register = () => {
         userId: user.uid
       });
 
-      alert(response.data.message);
+      // alert(response.data.message);
+      alert.show(response.data.message)
 
       setUser({
         displayName: "",
@@ -65,7 +69,7 @@ const Register = () => {
         confirmPassword: ""
       });
     } catch (error) {
-      alert(error.message);
+      alert.show(error.message)
     }
   };
   const { displayName, email, phone, password, confirmPassword } = user;
@@ -108,7 +112,7 @@ const Register = () => {
         name="password"
         placeholder="Password"
         classNam="input-field"
-        style={{ margin: "5px 0" }}
+        style={{ marghekin: "5px 0" }}
         onChange={handleChange}
         value={password}
         required
@@ -129,14 +133,14 @@ const Register = () => {
         id="terms"
         className="check-box d-none"
       />
-      <label htmlFor="terms" className="pt-2">
+      <label htmlFor="terms" className="pt-2 text-white">
         {check ? (
-          <i className="fas fa-check-square fa-1x"></i>
+          <i className="fas fa-check-square fa-1x text-white"></i>
         ) : (
-            <i className="far fa-check-square fa-1x"></i>
+            <i className="far fa-check-square fa-1x text-white"></i>
           )}
 
-        <span className="rm-pass ml-2" onClick={() => setCheck(!check)}>
+        <span className="rm-pass ml-2 text-white" onClick={() => setCheck(!check)}>
           I agree to the terms and condition
         </span>
       </label>

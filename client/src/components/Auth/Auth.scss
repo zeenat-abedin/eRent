@@ -3,25 +3,22 @@
   padding: 0;
   font-family: serif;
 }
-​ .hero {
-  height: 100%;
-  width: 100%;
-
-  // background-size: cover
-  // background-color: #ccc;
-  position: absolute;
+#auth {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../images/auth.jpg") no-repeat center center / cover !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
 }
 .form-box {
   width: 380px;
-  height: 520px;
+  height: 600px;
   position: relative;
-  margin: 6% auto;
-  // background: #fff;
   padding: 5px 20px;
   overflow: hidden;
   margin-bottom: 0;
   padding-bottom: 2rem;
-  // background: rgba(255, 255, 255, 0.1);
 }
 .button-box {
   width: 220px;
@@ -46,7 +43,6 @@
   position: absolute;
   width: 110px;
   height: 100%;
-  // background: linear-gradient(to right, #ff105f, #ffad06);
   background: linear-gradient(
     to right bottom,
     rgb(105, 142, 148),
@@ -56,11 +52,11 @@
   transition: 0.5s;
   color: #fff;
 }
-​ .social-icons {
+​.social-icons {
   margin: 30px auto;
   text-align: center;
 }
-i.fab {
+.social-icon {
   cursor: pointer;
   font-size: 25px;
   background: linear-gradient(
@@ -77,7 +73,7 @@ i.fab {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-​ .custom-input-group {
+.custom-input-group {
   top: 180px;
   position: absolute;
   width: 280px;
@@ -87,7 +83,7 @@ i.fab {
 #login {
   left: 50px;
 }
-​ #register {
+​#register {
   left: 450px;
 }
 
@@ -97,7 +93,6 @@ i.fab {
   cursor: pointer;
   display: block;
   margin: auto;
-  // background: linear-gradient(to right, #ff105f, #ffad06) !important;
   background: linear-gradient(
     to right bottom,
     rgb(105, 142, 148),
@@ -114,23 +109,4 @@ i.fab {
     width: 95%;
     height: 520px;
   }
-}
-
-// .headerContent {
-//   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-//     url("../images/auth.jpg");
-//   background-position: center !important;
-//   background-repeat: no-repeat !important;
-//   background-size: cover !important;
-//   min-height: 500px;
-//   background-color: #333;
-//   width: 100%;
-//   height: 100vh;
-//   z-index: -1;
-//   opacity: 0.9;
-// }
-
-body {
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("../images/auth.jpg") no-repeat center center / cover !important;
 }

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 import { signInWithGoogle } from "../../firebase/util";
 import Login from "./Login";
 import Register from "./Register";
 import axios from "../../config/axios";
+import Navbar from "../Navbar/Navbar";
 
 import "./Auth.scss";
 
@@ -24,8 +25,9 @@ const Auth = () => {
     console.log(response.data);
   };
   return (
-    <div>
-      <div className="hero">
+    <Fragment>
+      <Navbar />
+      <div id="auth">
         <div className="form-box">
           <div className="button-box">
             <div id="btn" style={btnStyle}></div>
@@ -40,21 +42,15 @@ const Auth = () => {
             </button>
           </div>
           <div className="social-icons text-center">
-            <i className="fab fa-facebook"></i>
-            <i className="fab fa-google mx-2" onClick={googleClick}></i>
-            <i className="fab fa-twitter"></i>
+            <i className="fab social-icon fa-facebook"></i>
+            <i className="fab social-icon fa-google mx-2" onClick={googleClick}></i>
+            <i className="fab social-icon fa-twitter"></i>
           </div>
           {toggle === "login" ? <Login /> : <Register />}
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 
 export default Auth;
-
-/*
-
- btn.style.left = "110px";
-btn.style.left = "0";
-*/
