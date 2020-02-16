@@ -39,8 +39,12 @@ const NavBar = ({ Color, history }) => {
             ) : (
                 <Nav.Link href='/auth' className="btn btn-outline-light nav-text button-text mr-2"> Login</Nav.Link>
               )}
+            {currentUser || localStorage.getItem("user") ? (
             <Nav.Link href="/sellProduct" className="btn btn-outline-light button-text nav-text mr-3">Sell Product</Nav.Link>
-          </Nav>
+            ):(
+            <Nav.Link href="/auth" className="btn btn-outline-light button-text nav-text mr-3">Sell Product</Nav.Link>
+            )}
+            </Nav>
         </Navbar.Collapse>
       </Navbar>
     </div>

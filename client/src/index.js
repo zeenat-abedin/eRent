@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-oldschool-dark'
-import { store } from './redux/store';
+import store from './redux/store';
 
 import './index.scss';
 

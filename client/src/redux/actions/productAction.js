@@ -1,12 +1,10 @@
-import { POST_PRODUCT } from './actionType';
+import { GET_PRODUCTS } from './actionType';
 import axios from '../../config/axios'
-export const postProduct = (product) => dispatch => (
+export const getProducts = () => dispatch => (
   axios
-    .post('/products/addProduct', {
-      product
-    }).then(res =>
+    .get('/Products/getProducts').then(res =>
       dispatch({
-        type: "POST_PRODUCT",
+        type: GET_PRODUCTS,
         payload: res.data
       }))
 )

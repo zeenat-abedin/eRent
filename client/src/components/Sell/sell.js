@@ -1,15 +1,20 @@
 import React, { useEffect, useState, useRef } from 'react'
 import NavBar from '../Navbar/Navbar'
 import { RegionDropdown, } from 'react-country-region-selector';
-import { postProduct } from '../../redux/actions/productAction'
+import { POST_PRODUCT } from '../../redux/actions/actionType'
 import { connect } from 'react-redux'
-import { mapDispatchToProps } from '../../redux/store'
+import axios from '../../config/axios'
+import { useDispatch } from 'react-redux'
 import './sell.scss'
-function Sell(props) {
+function Sell() {
   const fileInput = useRef(null)
+  const dispatch = useDispatch()
   const [productDetails, setDetails] = useState({
     Title: '',
     Description: '',
+    houseType: "",
+    maintenanace: "",
+    furniture: "",
     Price: '',
     Area: '',
     listedBy: '',
@@ -25,9 +30,13 @@ function Sell(props) {
     userName: '',
     mobileNumber: '',
     email: '',
+    msg: false,
     formValidation: {
       titleValid: "",
       descriptionValid: "",
+      houseTypeValid: "",
+      maintenanaceValid: "",
+      furnitureValid: "",
       priceValid: "",
       areaValid: "",
       listedByValid: "",
@@ -72,8 +81,24 @@ function Sell(props) {
         } else if (value <= 0) {
           productDetails.formValidation.priceValid = "Should not be empty"
           break;
-        } else {
+        }
+        //  else if (Price <= 500) {
+        //   productDetails.formValidation.priceValid = "Price should be more than 500"
+        // }
+        else {
           productDetails.formValidation.priceValid = ""
+        }
+        break;
+      }
+      case "maintenanace": {
+        if (isNaN(value)) {
+          productDetails.formValidation.maintenanaceValid = "should be a number"
+          break;
+        } else if (value <= 0) {
+          productDetails.formValidation.maintenanaceValid = "Should not be empty"
+          break;
+        } else {
+          productDetails.formValidation.maintenanaceValid = ""
         }
         break;
       }
@@ -118,7 +143,6 @@ function Sell(props) {
         break;
       }
       case 'userName': {
-        console.log(value)
         productDetails.formValidation.userNameValid =
           value.length <= 0 ? "username should not be empty" : "";
         break;
@@ -148,7 +172,7 @@ function Sell(props) {
     })
   }
   const formValidation = () => {
-    const { listedBy, Bedrooms, parking, pictureOne, pictureTwo, pictureThree } = productDetails
+    const { listedBy, Bedrooms, parking, houseType, furniture } = productDetails
     let { region } = locationDetails
     let validationData = {
       formValid: true
@@ -184,35 +208,39 @@ function Sell(props) {
       validationData.formValid = false;
     }
     if (productDetails.formValidation.userNameValid.length > 0) {
-      console.log('9')
       validationData.formValid = false;
     }
     if (productDetails.formValidation.mobileNumberValid.length > 0) {
-      console.log('10')
       validationData.formValid = false;
     }
     if (productDetails.formValidation.emailValid.length > 0) {
-      console.log('11')
       validationData.formValid = false;
     }
     if (listedBy === "") {
-      console.log(listedBy)
       productDetails.formValidation.listedByValid = "listedBy should be selected"
       validationData.formValid = false;
     } else {
       productDetails.formValidation.parkingValid = ""
     }
+    if (furniture === "") {
+      productDetails.formValidation.furnitureValid = "listedBy should be selected"
+      validationData.formValid = false;
+    } else {
+      productDetails.formValidation.furnitureValid = ""
+    }
+    if (houseType === "") {
+      productDetails.formValidation.houseTypeValid = "listedBy should be selected"
+      validationData.formValid = false;
+    } else {
+      productDetails.formValidation.houseTypeValid = ""
+    }
     if (Bedrooms === "") {
-      console.log(Bedrooms)
-      console.log("Bedrooms")
       productDetails.formValidation.bedroomsValid = "should be selected"
       validationData.formValid = false;
     } else {
       productDetails.formValidation.parkingValid = ""
     }
     if (parking === "") {
-      console.log(parking)
-      console.log("parking")
       productDetails.formValidation.parkingValid = "should be selected"
       validationData.formValid = false;
     } else {
@@ -224,7 +252,6 @@ function Sell(props) {
   }
   const getImage = (e) => {
     const name = e.target.name
-    console.log(name)
     setDetails(
       {
         ...productDetails,
@@ -232,20 +259,60 @@ function Sell(props) {
       }
     )
   }
-  const { Title, Description, Price, Area, listedBy, City, Landmark, Bedrooms, parking, floorCount, floorNumber,
+  const { id, displayName, email: userEmail, phone } = JSON.parse(localStorage.getItem('user'))
+  const { Title, Description, houseType, furniture, maintenanace, Price, Area, listedBy, City, Landmark, Bedrooms, parking, floorCount, floorNumber,
     pictureOne, pictureTwo, pictureThree, userName, mobileNumber, email } = productDetails
   const details = {
     Title, Description, Price, Area, listedBy, City, Landmark, Bedrooms, parking, floorCount, floorNumber,
-    pictureOne, pictureTwo, pictureThree, userName, mobileNumber, email
+    pictureOne
   }
+  // , pictureTwo, pictureThree
   const { region } = locationDetails
   const location = { region }
+  const form = new FormData()
+  form.append('userId', id)
+  form.append('Title', Title)
+  form.append('Description', Description)
+  form.append("houseType", houseType)
+  form.append("furniture", furniture)
+  form.append("maintenanace", maintenanace)
+  form.append('Price', Price)
+  form.append('Area', Area)
+  form.append('listedBy', listedBy)
+  form.append('City', City)
+  form.append('Landmark', Landmark)
+  form.append('Bedrooms', Bedrooms)
+  form.append('parking', parking)
+  form.append('location', region)
+  form.append('floorCount', floorCount)
+  form.append('floorNumber', floorNumber)
+  form.append('pictureOne', pictureOne)
+  form.append('pictureTwo', pictureTwo)
+  form.append('pictureThree', pictureThree)
+  form.append('userEmail', userEmail)
   const submitProductForm = (e) => {
     e.preventDefault()
     if (formValidation()) {
       e.target.reset()
       let product = Object.assign(details, location);
-      props.dispatch(postProduct(product))
+      const headers = {
+        "Content-Type": "form-data"
+      };
+      axios
+        .post('/createProduct/addProduct', form, headers).then(result =>
+          dispatch({
+            type: POST_PRODUCT,
+            payload: result
+          })
+        ).then(() => {
+          setDetails({
+            ...productDetails,
+            msg: true
+          })
+        }).catch(err => {
+          console.log("error")
+        }
+        )
     } else {
       alert("not success")
     }
@@ -253,7 +320,18 @@ function Sell(props) {
   return (
     <React.Fragment>
       <NavBar />
-      <form className="rentalForm" encType="multipart/form-data" onSubmit={submitProductForm} >
+      <form id="form-content" className="rentalForm" encType="multipart/form-data" onSubmit={submitProductForm} >
+        <div className="row" style={{ "marginBottom": "30px" }}>
+          <div className="col-sm-4">
+          </div>
+          <div className="col-sm-4">
+            {
+              productDetails.msg ? <span className="list-group-item list-group-item-action list-group-item-success">"Successfully posted! confirmation mail have send"</span> : ""
+            }
+          </div>
+          <div className="col-sm-4">
+          </div>
+        </div>
         <div className="container form-content" style={{ "background": "linear-gradient(to right bottom, rgb(105, 142, 148), rgb(5, 50, 58))" }}>
           <h2>Rent Property</h2>
           <p>Include Details</p>
@@ -265,7 +343,7 @@ function Sell(props) {
             {
               productDetails.formValidation.titleValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.titleValid}</span> : ""
             }
-            <input type="text" className={`form-control ${productDetails.formValidation.titleValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Title" name="Title" required />
+            <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.titleValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Title" name="Title" required />
           </div>
           <div>
             <label htmlFor="Description">
@@ -277,7 +355,47 @@ function Sell(props) {
             }
             <textarea rows='5' type="text" onChange={getInput} className={`form-control ${productDetails.formValidation.descriptionValid && 'is-invalid'}`} name="Description" placeholder="Enter Description" required></textarea>
           </div>
-          <div className="row">
+          <div className="row mt-2">
+            <div className="col-sm-4">
+              <label htmlFor="">
+                <b>Type</b>
+                <span className="text-danger">&nbsp;*</span>
+              </label>
+              {
+                productDetails.formValidation.houseTypeValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.houseTypeValid}</span> : ""
+              }
+              <select className={`form-control ${productDetails.formValidation.houseTypeValid && 'is-invalid'}`} onChange={getInput} name="houseType">
+                <option>select</option>
+                <option value="Apartments">Apartments</option>
+                <option value="houses and villas">Houses&Villas</option>
+              </select>
+            </div>
+            <div className="col-sm-4">
+              <label htmlFor="">
+                <b>Furnishing</b>
+                <span className="text-danger">&nbsp;*</span>
+              </label>
+              {
+                productDetails.formValidation.furnitureValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.furnitureValid}</span> : ""
+              }
+              <select className={`form-control ${productDetails.formValidation.furnitureValid && 'is-invalid'}`} onChange={getInput} name="furniture">
+                <option>select</option>
+                <option value="Furnished">Furnished</option>
+                <option value="unFurnished">unFurnished</option>
+              </select>
+            </div>
+            <div className="col-sm-4">
+              <label htmlFor="maintenance">
+                <b>Maintenance</b>
+                <span className="text-danger">&nbsp;*</span>
+              </label>
+              {
+                productDetails.formValidation.maintenanaceValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.maintenanaceValid}</span> : ""
+              }
+              <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.maintenanaceValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Maintenance" name="maintenanace" required />
+            </div>
+          </div>
+          <div className="row mt-2">
             <div className="col-sm-6">
               <label htmlFor="price">
                 <b>Price</b>
@@ -286,20 +404,20 @@ function Sell(props) {
               {
                 productDetails.formValidation.priceValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.priceValid}</span> : ""
               }
-              <input type="text" className={`form-control ${productDetails.formValidation.priceValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter price" name="Price" required />
+              <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.priceValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter price" name="Price" required />
             </div>
             <div className="col-sm-6">
-              <label htmlFor="price">
+              <label htmlFor="area">
                 <b>Builtup area (ft²)</b>
                 <span className="text-danger">&nbsp;*</span>
               </label>
               {
                 productDetails.formValidation.areaValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.areaValid}</span> : ""
               }
-              <input type="text" className={`form-control ${productDetails.formValidation.areaValid && 'is-invalid'} `} onChange={getInput} placeholder="Enter Area" name="Area" required />
+              <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.areaValid && 'is-invalid'} `} onChange={getInput} placeholder="Enter Area" name="Area" required />
             </div>
           </div>
-          <div className="">
+          <div className="mt-2">
             <label htmlFor="propertyList">
               <b>Listed By</b>
               <span className="text-danger">&nbsp;*</span>
@@ -314,7 +432,7 @@ function Sell(props) {
               <option value="Builder">Builder</option>
             </select>
           </div>
-          <div className="row">
+          <div className="row mt-2">
             <div className="col-4">
               <label htmlFor="propertyList">
                 <b>State</b>
@@ -337,7 +455,7 @@ function Sell(props) {
               {
                 productDetails.formValidation.cityValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.cityValid}</span> : ""
               }
-              <input type="text" className={`form-control ${productDetails.formValidation.cityValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter City" name="City" required />
+              <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.cityValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter City" name="City" required />
             </div>
             <div className="col-4">
               <label htmlFor="location">
@@ -347,10 +465,10 @@ function Sell(props) {
               {
                 productDetails.formValidation.landmarkValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.landmarkValid}</span> : ""
               }
-              <input type="text" className={`form-control ${productDetails.formValidation.landmarkValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Landmark" name="Landmark" required />
+              <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.landmarkValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Landmark" name="Landmark" required />
             </div>
           </div>
-          <div className="bedroomCount" style={{ "marginBottom": "12px" }}>
+          <div className="bedroomCount mt-2" style={{ "marginBottom": "12px" }}>
             <div className="row">
               <div className="col-sm-6">
                 <label htmlFor="bedrooms">
@@ -366,7 +484,7 @@ function Sell(props) {
                     1</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="Bedrooms" onChange={getInput} value='1' />
+                  <input className="form-check-input" type="radio" name="Bedrooms" onChange={getInput} value='2' />
                   <label className="form-check-label" htmlFor="exampleRadios2">
                     2
                   </label>
@@ -374,7 +492,7 @@ function Sell(props) {
                 <div className="form-check">
                   <input className="form-check-input" type="radio" name="Bedrooms" onChange={getInput} id="exampleRadios3" value='3' />
                   <label className="form-check-label" htmlFor="exampleRadios3">
-                    3 <b>+</b>
+                    3+
                   </label>
                 </div>
               </div>
@@ -409,7 +527,7 @@ function Sell(props) {
               {
                 productDetails.formValidation.TotalFloorsValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.TotalFloorsValid}</span> : ""
               }
-              <input type="text" className={`form-control ${productDetails.formValidation.TotalFloorsValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter number of floors" name="floorCount" required />
+              <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.TotalFloorsValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter number of floors" name="floorCount" required />
 
             </div>
             <div className="col-sm-6">
@@ -420,7 +538,7 @@ function Sell(props) {
               {
                 productDetails.formValidation.FloorNumberValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.FloorNumberValid}</span> : ""
               }
-              <input type="text" className={`form-control ${productDetails.formValidation.FloorNumberValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Floor number" name="floorNumber" required />
+              <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.FloorNumberValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Floor number" name="floorNumber" required />
             </div>
           </div>
           <div className="mt-2">
@@ -453,7 +571,7 @@ function Sell(props) {
                 {
                   productDetails.formValidation.userNameValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.userNameValid}</span> : ""
                 }
-                <input type="text" className={`form-control ${productDetails.formValidation.userNameValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Name" defaultValue="" name="userName" required />
+                <input type="text" defaultValue={displayName} className={`form-control ${productDetails.formValidation.userNameValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Name" name="userName" disabled required />
               </div>
               <div className="col-sm-6">
                 <label htmlFor="mobileNumber">
@@ -463,20 +581,22 @@ function Sell(props) {
                 {
                   productDetails.formValidation.mobileNumberValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.mobileNumberValid}</span> : ""
                 }
-                <input type="tel" pattern="[789][0-9]{9}" className={`form-control ${productDetails.formValidation.mobileNumberValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Mobile Number" defaultValue="" name="mobileNumber" />
+                <input type="tel" disabled pattern="[789][0-9]{9}" className={`form-control ${productDetails.formValidation.mobileNumberValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Mobile Number"
+                  defaultValue={phone} name="mobileNumber" />
               </div>
             </div>
-            <p>We will send you a confirmation mail after posting</p>
-            <div className="row">
+            <div className="row mt-2">
               <div className="col-sm-6">
                 <label htmlFor="email">
                   <b>Email</b>
                   <span className="text-danger">&nbsp;* &nbsp; </span>
                 </label>
+
                 {
                   productDetails.formValidation.emailValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.emailValid}</span> : ""
                 }
-                <input type="gmail" className={`form-control ${productDetails.formValidation.emailValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Email" defaultValue="" name="email" />
+                <input type="gmail" disabled className={`form-control ${productDetails.formValidation.emailValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Email" defaultValue={userEmail} name="email" />
+                <p>We will send you a confirmation mail after posting</p>
               </div>
             </div>
           </div>
@@ -487,4 +607,4 @@ function Sell(props) {
   )
 }
 
-export default connect(mapDispatchToProps)(Sell)
+export default Sell
