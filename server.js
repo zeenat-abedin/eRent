@@ -8,16 +8,16 @@ const sequelize = require("./config/db");
 //seller product database
 const productSequelize = require('./config/productsDb')
 const userRouter = require("./routes/users");
-const productsRouter = require("./routes/createProducts")
-const fetchProducts = require("./routes/getProducts")
+// const productsRouter = require("./routes/createProducts")
+// const fetchProducts = require("./routes/getProducts")
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/auth", userRouter);
 //create products
-app.use("/createProduct", productsRouter)
+// app.use("/createProduct", productsRouter)
 //get products
-app.use("/Products", fetchProducts)
+// app.use("/Products", fetchProducts)
 // DB Connection
 // productSequelize
 //   .sync()

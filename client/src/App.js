@@ -11,7 +11,8 @@ import Home from "./components/Home/Home";
 import Chat from "./components/Chat/Chat";
 import Sell from "./components/Sell/sell"
 import Logout from './components/Logout/logout';
-import Footer from './components/Footer/Footer'
+import Footer from './components/Footer/Footer';
+import SinglePost from './components/SinglePost/SinglePost';
 // import Navbar from "./components/Navbar/Navbar";
 const App = ({ setCurrentUser, currentUser }) => {
   let unsubscribeFromAuth = null;
@@ -62,6 +63,7 @@ const App = ({ setCurrentUser, currentUser }) => {
         <Route path='/sellProduct' component={Sell} />
         <Route path='/logout' component={Logout} />
         <Route path="/chat" component={Chat} />
+        <Route path="/post/:postId" component={SinglePost} />
         {renderAuthPage()}
       </Switch>
       <Footer />
