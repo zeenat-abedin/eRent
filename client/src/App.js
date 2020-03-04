@@ -6,13 +6,12 @@ import { connect } from "react-redux";
 import { auth, createUserProfileDocument } from "./firebase/util";
 import { setCurrentUser } from "./redux/actions/userAction";
 import Auth from "./components/Auth/Auth";
-
 import Home from "./components/Home/Home";
 import Chat from "./components/Chat/Chat";
 import Sell from "./components/Sell/sell"
 import Logout from './components/Logout/logout';
 import Footer from './components/Footer/Footer'
-// import Navbar from "./components/Navbar/Navbar";
+import Profile from './components/userProfile/profile'
 const App = ({ setCurrentUser, currentUser }) => {
   let unsubscribeFromAuth = null;
 
@@ -62,6 +61,7 @@ const App = ({ setCurrentUser, currentUser }) => {
         <Route path='/sellProduct' component={Sell} />
         <Route path='/logout' component={Logout} />
         <Route path="/chat" component={Chat} />
+        <Route path='/Profile' component={Profile} />
         {renderAuthPage()}
       </Switch>
       <Footer />

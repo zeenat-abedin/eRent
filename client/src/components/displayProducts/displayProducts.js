@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { getProducts } from '../../redux/actions/productAction'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import ProductDisplay from './productsdisplay'
+import Pagination from './pagination'
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -14,48 +15,40 @@ import {
 import './displayProducts.css'
 function ProductsDisplay() {
   const Products = useSelector(state => state.users.products)
+  let ProductsByLocation = useSelector(state => state.users.citiesByLocation)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(4)
+  const [color, setColor] = useState()
   const dispatch = useDispatch()
   useEffect(() => {
-    console.log("mounting----------------")
     dispatch(getProducts())
   }, [])
-  useEffect(() => {
-    console.log("updatin----------------")
-    dispatch(getProducts())
-  },
-    [Products]
-  )
+  const indexofLastPosts = currentPage * postsPerPage;
+  const indexOfFirstPosts = indexofLastPosts - postsPerPage;
+  let currentProducts
+  if (ProductsByLocation) {
+    ProductsByLocation = ProductsByLocation.slice(indexOfFirstPosts, indexofLastPosts)
+  }
+  if (Products) {
+    currentProducts = Products.slice(indexOfFirstPosts, indexofLastPosts)
+  }
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+    setColor({
+      color: "changeColor"
+    })
+  }
   return (
     <Fragment>
-      <div className="container wrap-product">
-        {Products ? <div className="row">
-          {
-            Products.map((data, index) => {
-              return <div key={index} className="col-xl-3 col-sm-6 col-md-4  col-lg-4 ">
-                <div className="product">
-                  <div className="card img-container">
-                    <Link to='/productdetails'>
-                      <img src={data.images[0]} alt="product" className="card-img-top img-content" />
-                    </Link>
-                    <div className="userlike">
-                      <button type="button" className="btn btn-secondary" style={{ "marginBottom": "5px" }}><i className="fa fa-heart-o"></i></button>
-                      <button type="button" className="btn btn-secondary"><i className="fa fa-share-alt " aria-hidden="true"></i></button>
-                    </div>
-                    <div className="card-body">
-                      <h5 className="card-title">{data.title}</h5>
-                      <span className="card-text">{data.bedrooms}bhk-{data.area}ft2</span>
-                    </div>
-                    <div className="card-footer footer-data">
-                      <span className="title">{data.state}</span>
-                      <span className="price">&#x20B9;<b>{data.price}</b></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            })
-          }
-        </div> : "Loading...."}
-      </div>
+      {ProductsByLocation ?
+        <ProductDisplay fetchProducts={ProductsByLocation} postsPerPage={postsPerPage} />
+        : <ProductDisplay fetchProducts={currentProducts} postsPerPage={postsPerPage} />
+      }
+      {ProductsByLocation ?
+        <Pagination postsPerPage={postsPerPage} totalPosts={ProductsByLocation} paginate={paginate} color={color} />
+        :
+        <Pagination postsPerPage={postsPerPage} totalPosts={Products} paginate={paginate} color={color} />
+      }
     </Fragment>
   )
 }
