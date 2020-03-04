@@ -17,18 +17,26 @@ const SingleProduct = () => {
           </div>
           <div className="col-12 col-md-7">
             {/* Price Details */}
-            <div className="top d-flex align-items-center border shadow-sm p-3">
+            <div className="top d-flex align-items-center justify-content-between border shadow-sm p-3">
               <div className="left">
                 <p className="m-0 text-muted">
                   Rent from <strike>₹14000</strike>
                 </p>
                 <p className="m-0">
-                  <span className="price">₹12000/bed</span>
+                  <span>
+                    <span className="price">₹1299/bed</span>
+                  </span>
                 </p>
               </div>
-              <div className="right pl-5">
+              <div className="right">
                 <p className="m-0 text-muted">Security deposit</p>
                 <span className="security m-0">₹25000</span>
+              </div>
+              <div className="contact-num">
+                <p className="m-0 text-muted">Contact Number</p>
+                <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+                  98XXXXXXXX
+                </span>
               </div>
             </div>
             {/* Post details */}
