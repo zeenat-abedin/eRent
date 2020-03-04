@@ -11,6 +11,7 @@ const fetchProducts = require("./routes/getProducts")
 const fetchCities = require('./routes/fetchCities')
 const fetchProductsByLocation = require('./routes/getProductsByLocation')
 const searchRoute = require('./routes/searchDetails')
+const userDetails = require('./routes/updateProfile')
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,6 +27,8 @@ app.use('/cities', fetchCities)
 app.use('/fetchProducts', fetchProductsByLocation)
 //search details
 app.use('/search', searchRoute)
+//user profile
+app.use('/profile', userDetails)
 // DB Connection
 sequelize
   .sync()
