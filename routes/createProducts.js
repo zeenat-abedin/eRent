@@ -39,9 +39,9 @@ router.post('/addProduct', uploadImages, async (req, res, next) => {
   pictureOne = newUpload[0]
   pictureTwo = newUpload[1]
   pictureThree = newUpload[2]
-  const { userEmail, userId, Title, Description, houseType, furniture, maintenanace, Price, Area, listedBy, location, City, Landmark, Bedrooms, parking, floorCount, floorNumber,
+  const { userEmail, userId, Title, phone_number, Description, houseType, furniture, maintenanace, Price, Area, listedBy, location, City, Landmark, Bedrooms, parking, floorCount, floorNumber,
   } = req.body
-  console.log(Title)
+  console.log(phone_number)
   if (newUpload.length === filePaths.length) {
     let createProductDetails = await productModel.create({
       userId,
@@ -60,6 +60,7 @@ router.post('/addProduct', uploadImages, async (req, res, next) => {
       parking,
       floorCount,
       floorNumber,
+      phone_number,
       images: [pictureOne, pictureTwo, pictureThree],
       status: false,
     }).then(result => {
@@ -92,6 +93,7 @@ router.post('/addProduct', uploadImages, async (req, res, next) => {
       });
       res.json(result)
     }).catch(err => {
+      console.log(err)
       res.send(err)
     })
   }

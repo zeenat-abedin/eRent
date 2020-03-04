@@ -22,6 +22,15 @@
   transition-property: transform;
   color:black!important
 }
+.location{
+  background: transparent;
+  color:white;
+  font-weight: 500;
+  width:130px
+}
+.toast_container{
+  background: linear-gradient(to right bottom, rgb(105, 142, 148), rgb(5, 50, 58)) !important
+}
 @media only screen and (max-width: 990px){
  .button-text{
   width: 100px;
@@ -30,4 +39,14 @@
  .dropDown{
    width: 30px;
  }
+// .Navlocation{
+//    position: absolute;
+//    left:110px
+//  }
 }
+@media only screen and (max-width:320){
+.Navlocation{
+  display: none
+ }
+}
+

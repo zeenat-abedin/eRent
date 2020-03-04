@@ -63,6 +63,7 @@ function Sell() {
   const getInput = (e) => {
     e.preventDefault()
     const { name, value } = e.target
+    console.log(name, value)
     switch (name) {
       case 'Title': {
         productDetails.formValidation.titleValid =
@@ -270,6 +271,13 @@ function Sell() {
   const { region } = locationDetails
   const location = { region }
   const form = new FormData()
+
+  if (mobileNumber !== '') {
+    form.append('phone_number', mobileNumber)
+  }else{
+    form.append('phone_number', phone)
+  }
+
   form.append('userId', id)
   form.append('Title', Title)
   form.append('Description', Description)
@@ -293,7 +301,7 @@ function Sell() {
   const submitProductForm = (e) => {
     e.preventDefault()
     if (formValidation()) {
-      e.target.reset()
+      // e.target.reset()
       let product = Object.assign(details, location);
       const headers = {
         "Content-Type": "form-data"
@@ -581,8 +589,13 @@ function Sell() {
                 {
                   productDetails.formValidation.mobileNumberValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.mobileNumberValid}</span> : ""
                 }
-                <input type="tel" disabled pattern="[789][0-9]{9}" className={`form-control ${productDetails.formValidation.mobileNumberValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Mobile Number"
-                  defaultValue={phone} name="mobileNumber" />
+                {phone ?
+                  <input type="tel" disabled pattern="[789][0-9]{9}" className={`form-control ${productDetails.formValidation.mobileNumberValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Mobile Number"
+                    defaultValue={phone} name="mobileNumber" />
+                  :
+                  <input type="tel" pattern="[789][0-9]{9}" className={`form-control ${productDetails.formValidation.mobileNumberValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Mobile Number"
+                    name="mobileNumber" />
+                }
               </div>
             </div>
             <div className="row mt-2">

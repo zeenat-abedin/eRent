@@ -5,11 +5,12 @@ const app = express();
 
 const sequelize = require("./config/db");
 
-//seller product database
-const productSequelize = require('./config/productsDb')
 const userRouter = require("./routes/users");
-// const productsRouter = require("./routes/createProducts")
-// const fetchProducts = require("./routes/getProducts")
+const productsRouter = require("./routes/createProducts")
+const fetchProducts = require("./routes/getProducts")
+const fetchCities = require('./routes/fetchCities')
+const fetchProductsByLocation = require('./routes/getProductsByLocation')
+const searchRoute = require('./routes/searchDetails')
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,16 +18,15 @@ app.use("/auth", userRouter);
 //create products
 // app.use("/createProduct", productsRouter)
 //get products
-// app.use("/Products", fetchProducts)
+app.use("/Products", fetchProducts)
+
+//fetch cities
+app.use('/cities', fetchCities)
+//fetch products by location
+app.use('/fetchProducts', fetchProductsByLocation)
+//search details
+app.use('/search', searchRoute)
 // DB Connection
-// productSequelize
-//   .sync()
-//   .then(function (err) {
-//     console.log("Connection has been established successfully for seller DB.");
-//   })
-//   .catch(function (err) {
-//     console.log("Unable to connect to the seller database:", err.message);
-//   });
 sequelize
   .sync()
   .then(function (err) {
