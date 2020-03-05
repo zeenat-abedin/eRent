@@ -2,7 +2,7 @@ const multer = require('multer')
 const path = require('path')
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '/tmp');
+    cb(null, './tmp');
   },
   filename: function (req, file, cb) {
     //current date while uploading
@@ -18,7 +18,7 @@ const upload = multer({
   storage: storage,
   //maximum size of image is 2mb
   limits: {
-    fileSize: 1024 * 1024 * 2
+    fileSize: 1024 * 1024 * 5
   },
   fileFilter: function (req, file, cb) {
     var extension = path.extname(file.originalname);

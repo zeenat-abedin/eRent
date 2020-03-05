@@ -86,6 +86,7 @@ router.post('/addProduct', uploadImages, async (req, res, next) => {
         if (error) {
           console.log(error);
           res.send("error")
+          return
         } else {
           console.log('Email sent: ' + info.response);
           // res.send("success")

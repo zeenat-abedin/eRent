@@ -11,7 +11,7 @@ function ProductDisplay({ fetchProducts, postsPerPage }) {
               return <div key={index} className="col-xl-3 col-sm-6 col-md-4  col-lg-4 ">
                 <div className="product">
                   <div className="card img-container">
-                    <Link to='/productdetails'>
+                    <Link to={`/post/${data.id}`}>
                       <img src={data.images[0]} alt="product" className="card-img-top img-content" />
                     </Link>
                     <div className="userlike">
