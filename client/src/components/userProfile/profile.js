@@ -12,7 +12,7 @@ function Profile() {
   const [userDetails, setUserDetails] = useState(null)
   let dispatch = useDispatch()
   let userId = JSON.parse(localStorage.getItem("user")).id
-
+  let userName = JSON.parse(localStorage.getItem("user")).displayName
   useEffect(() => {
     const getProfileDetails = async () => {
       try {
@@ -49,6 +49,7 @@ function Profile() {
           <div>
             {
               userDetails ? <div className="mt-4">
+                <h4>Hello <b>{userName}</b> </h4>
                 <UserDetails userDetails={userDetails} userId={userId} />
               </div> : null
             }
