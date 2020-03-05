@@ -14,9 +14,32 @@ const SingleProduct = ({ match }) => {
   useEffect(() => {
     dispatch(getProduct(Number(postId)));
   }, [postId]);
-  const singleProduct = useSelector(state => state.users.singleProduct);
+  const { singleProduct, errorMessage } = useSelector(state => state.users);
+  if (errorMessage) {
+    return (
+      <React.Fragment>
+        <Navbar />
+        <div className="container-fluid my-5 h-70">
+          <div className="row h-75">
+            <div className="col-12">
+              <h1 className="text-center text-danger">{errorMessage}</h1>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
   if (!singleProduct) {
-    return <h1 className="text-center">Loading...</h1>;
+    return <React.Fragment>
+      <Navbar />
+      <div className="container-fluid my-5 h-70">
+        <div className="row h-75">
+          <div className="col-12">
+            <h1 className="text-center text-info">Loading...</h1>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
   }
   console.log(singleProduct);
   const {

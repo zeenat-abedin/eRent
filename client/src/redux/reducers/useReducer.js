@@ -5,14 +5,16 @@ import {
   POST_PRODUCT,
   GET_CITIES,
   GET_PRODUCTS_BY_LOCATION,
-  GET_SINGLE_PRODUCT
+  GET_SINGLE_PRODUCT,
+  ERROR_MESSAGE
 } from "../actions/actionType";
 
 const INITIAL_STATE = {
   currentUser: null,
   products: null,
   cites: null,
-  singleProduct: null
+  singleProduct: null,
+  errorMessage: null
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -54,6 +56,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         singleProduct: payload
+      };
+    case ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: payload
       };
     default:
       return state;
