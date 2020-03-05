@@ -1,17 +1,9 @@
 import React, { Fragment } from "react"
-import { connect } from 'react-redux'
 import { getProducts } from '../../redux/actions/productAction'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductDisplay from './productsdisplay'
 import Pagination from './pagination'
-import {
-  EmailShareButton,
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-} from "react-share";
 import './displayProducts.css'
 function ProductsDisplay() {
   const Products = useSelector(state => state.users.products)

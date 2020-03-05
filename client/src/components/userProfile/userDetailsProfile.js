@@ -38,8 +38,8 @@ function Example({ userDetails, userId }) {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Update Profile</Modal.Title>
+        <Modal.Header closeButton style={{ "background": "linear-gradient(to right bottom, rgb(105, 142, 148), rgb(5, 50, 58))" }}>
+          <Modal.Title style={{ "color": "white" }}>Update Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ToastContainer />
@@ -47,7 +47,7 @@ function Example({ userDetails, userId }) {
             <div className="form-group">
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1">Name</label>
-                <input name="full_name" type="text" onChange={getInput} defaultValue={full_name} className="form-control" placeholder="Name" />
+                <input name="full_name" type="text" onChange={getInput} defaultValue={userdata.full_name} className="form-control" placeholder="Name" />
               </div>
               <label htmlFor="exampleInputEmail1">Email address</label>
               <input type="email" defaultValue={email} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" disabled />
@@ -70,8 +70,8 @@ function Example({ userDetails, userId }) {
           </Button>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer style={{ "background": "linear-gradient(to right bottom, rgb(105, 142, 148), rgb(5, 50, 58))" }}>
+          <Button variant="primary" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

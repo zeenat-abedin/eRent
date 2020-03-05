@@ -1,9 +1,10 @@
-import { SET_CURRENT_USER, CLEAR_USER, GET_PRODUCTS, POST_PRODUCT, GET_CITIES, GET_PRODUCTS_BY_LOCATION } from "../actions/actionType";
+import { SET_CURRENT_USER, CLEAR_USER, GET_PRODUCTS, POST_PRODUCT, GET_CITIES, GET_PRODUCTS_BY_LOCATION, USER_PRODUCTS } from "../actions/actionType";
 
 const INITIAL_STATE = {
   currentUser: null,
   products: null,
-  cites: null
+  cites: null,
+  userProducts: null
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -40,6 +41,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         citiesByLocation: payload.data
+      }
+    case USER_PRODUCTS:
+      return {
+        ...state,
+        userProducts: payload
       }
     default:
       return state;
