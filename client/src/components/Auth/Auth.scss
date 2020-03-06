@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: serif;
+}
+#auth {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../images/auth.jpg") no-repeat center center / cover !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+.form-box {
+  width: 380px;
+  height: 600px;
+  position: relative;
+  padding: 5px 20px;
+  overflow: hidden;
+  margin-bottom: 0;
+  padding-bottom: 2rem;
+}
+.button-box {
+  width: 220px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 0 0 5px 9px rgba(204, 204, 204, 0.137);
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+.toggle-btn {
+  padding: 10px 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  color: #fff;
+}
+#btn {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 110px;
+  height: 100%;
+  background: linear-gradient(
+    to right bottom,
+    rgb(105, 142, 148),
+    rgb(5, 50, 58)
+  );
+  border-radius: 30px;
+  transition: 0.5s;
+  color: #fff;
+}
+​.social-icons {
+  margin: 30px auto;
+  text-align: center;
+}
+.social-icon {
+  cursor: pointer;
+  font-size: 25px;
+  background: linear-gradient(
+    to right bottom,
+    rgb(105, 142, 148),
+    rgb(5, 50, 58)
+  );
+  background: -webkit-linear-gradient(
+    to right bottom,
+    rgb(105, 142, 148),
+    rgb(5, 50, 58)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.custom-input-group {
+  top: 180px;
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
+}
+
+#login {
+  left: 50px;
+}
+​#register {
+  left: 450px;
+}
+
+.submit-button {
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: linear-gradient(
+    to right bottom,
+    rgb(105, 142, 148),
+    rgb(5, 50, 58)
+  );
+  border: 0;
+  outline: none;
+  border-radius: 36px;
+  color: #fff;
+}
+
+@media screen and (max-width: 400px) {
+  .form-box {
+    width: 95%;
+    height: 600px;
+  }
+}

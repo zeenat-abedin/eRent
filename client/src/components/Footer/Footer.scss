@@ -1,0 +1,76 @@
+$primary-color: #000;
+
+.footer {
+  padding: 2rem 0 !important;
+  background-color: $primary-color;
+}
+.tagline {
+  h3 {
+    color: rgb(105, 142, 148);
+  }
+}
+
+.bottom {
+  border-top: 1px solid #ccc !important;
+}
+.information h4,
+.helpful-links h4,
+.subscribe h4,
+.aboutus h4 {
+  color: rgb(105, 142, 148) !important;
+}
+ul {
+  li {
+    list-style: none;
+    font-size: 1rem !important;
+    color: #fff !important;
+  }
+}
+
+.subscibe-input {
+  display: block !important;
+  padding: 5px 8px !important;
+  border-radius: 5px !important;
+  border: none !important;
+}
+
+.subscribe-button {
+  background: linear-gradient(
+    to right bottom,
+    rgb(105, 142, 148),
+    rgb(5, 50, 58)
+  ) !important;
+  border: none !important;
+  color: #fff !important;
+  padding: 5px 20px !important;
+  border-radius: 5px !important;
+  margin-top: 1rem !important;
+}
+
+.icon {
+  display: inline-block !important;
+  height: 50px !important;
+  width: 50px !important;
+  background: linear-gradient(
+    to right bottom,
+    rgb(105, 142, 148),
+    rgb(5, 50, 58)
+  ) !important;
+  margin-right: 1rem !important;
+  border-radius: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  i {
+    &.fab {
+      color: #fff !important ;
+      font-size: 18px !important;
+    }
+  }
+}
+
+.contact-icon {
+  color: rgb(105, 142, 148) !important;
+}
