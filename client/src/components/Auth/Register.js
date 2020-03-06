@@ -31,7 +31,7 @@ const Register = () => {
     const { displayName, email, phone, password, confirmPassword } = user;
 
     if (password !== confirmPassword) {
-      return alert(`Password don't match`);
+      alert.show("ConfirmPassword and password should be same")
     }
 
     try {
@@ -86,12 +86,11 @@ const Register = () => {
         required
       />
       <Input
-        type="text"
+        type="tel"
         name="phone"
-        placeholder="Number"
+        placeholder="Mobile Number"
         classNam="input-field"
-        minLength="10"
-        maxLength="10"
+        pattern="[789][0-9]{9}"
         style={{ margin: "5px 0" }}
         onChange={handleChange}
         value={phone}

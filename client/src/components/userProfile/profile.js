@@ -4,7 +4,7 @@ import ProductDisplay from '../displayProducts/productsdisplay'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from '../../config/axios'
 import { USER_PRODUCTS } from '../../redux/actions/actionType'
-import UserDetails from './userDetailsProfile'
+import UserDetailsFile from './userDetailsProfile'
 import UserProductsFile from './userProducts'
 function Profile() {
   const Products = useSelector(state => state.users.products)
@@ -50,7 +50,7 @@ function Profile() {
             {
               userDetails ? <div className="mt-4">
                 <h4>Hello <b>{userName}</b> </h4>
-                <UserDetails userDetails={userDetails} userId={userId} />
+                <UserDetailsFile userDetails={userDetails} userId={userId} />
               </div> : null
             }
             {
