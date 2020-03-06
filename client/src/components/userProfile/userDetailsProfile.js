@@ -11,6 +11,7 @@ function Example({ userDetails, userId }) {
   const handleClose = () => setShow(false);
   const [userdata, updateUserData] = useState({ full_name: full_name, phone_number: phone_number })
   const getInput = (e) => {
+    console.log(e.target.value)
     updateUserData({
       ...userdata,
       [e.target.name]: e.target.value
@@ -52,7 +53,7 @@ function Example({ userDetails, userId }) {
               <label htmlFor="exampleInputEmail1">Email address</label>
               <input type="email" defaultValue={email} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" disabled />
             </div>
-            {userDetails.phone_number ?
+            {phone_number.charAt(0) !== "0" ?
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Mobile Number</label>
                 <input type="tel" disabled pattern="[789][0-9]{9}" className="form-control" placeholder="Mobile Number"
@@ -61,7 +62,7 @@ function Example({ userDetails, userId }) {
               :
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Mobile Number</label>
-                <input type="tel" pattern="[789][0-9]{9}" className="form-control" placeholder="Mobile Number"
+                <input type="tel" pattern="[789][0-9]{9}" defaultValue={phone_number} onChange={getInput} className="form-control" placeholder="Mobile Number"
                   name="phone_number" />
               </div>
             }
