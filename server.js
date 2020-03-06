@@ -13,6 +13,7 @@ const fetchProductsByLocation = require('./routes/getProductsByLocation')
 const searchRoute = require('./routes/searchDetails')
 const userDetails = require('./routes/updateProfile')
 const singlePostRoute = require("./routes/singleProduct");
+const deleteProduct = require('./routes/deleteProduct')
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,6 +33,7 @@ app.use('/search', searchRoute)
 app.use('/profile', userDetails)
 app.use("/post", singlePostRoute);
 // DB Connection
+app.use('/delete',deleteProduct)
 sequelize
   .sync()
   .then(function (err) {
