@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
+const path = require('path')
 
 const sequelize = require("./config/db");
 
@@ -33,7 +34,7 @@ app.use('/search', searchRoute)
 app.use('/profile', userDetails)
 app.use("/post", singlePostRoute);
 // DB Connection
-app.use('/delete',deleteProduct)
+app.use('/delete', deleteProduct)
 sequelize
   .sync()
   .then(function (err) {
@@ -43,6 +44,14 @@ sequelize
     console.log("Unable to connect to the database:", err.message);
   });
 
+// Server Static assests in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server Running at ${PORT}`));
