@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import NavBar from '../Navbar/Navbar'
 import { RegionDropdown, } from 'react-country-region-selector';
 import { POST_PRODUCT } from '../../redux/actions/actionType'
+import { connect } from 'react-redux'
 import axios from '../../config/axios'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
 import './sell.scss'
 function Sell() {
+  const fileInput = useRef(null)
   const dispatch = useDispatch()
   const [productDetails, setDetails] = useState({
     Title: '',
@@ -83,6 +83,9 @@ function Sell() {
           productDetails.formValidation.priceValid = "Should not be empty"
           break;
         }
+        //  else if (Price <= 500) {
+        //   productDetails.formValidation.priceValid = "Price should be more than 500"
+        // }
         else {
           productDetails.formValidation.priceValid = ""
         }
@@ -250,34 +253,28 @@ function Sell() {
   }
   const getImage = (e) => {
     const name = e.target.name
-    let extension = e.target.files[0].type.split('/')[1]
-    if (extension !== 'jpeg' && extension !== 'png' && extension !== 'bmp' && extension !== 'jpg' && extension !== 'TIFF ') {
-      toast.warn("Images should be jpeg/png/bmp/jpg/TIFF")
-    } else {
-      console.log(e.target.files[0].type.split('/')[1])
-      setDetails(
-        {
-          ...productDetails,
-          [name]: e.target.files[0]
-        }
-      )
-    }
+    setDetails(
+      {
+        ...productDetails,
+        [name]: e.target.files[0]
+      }
+    )
   }
   const { id, displayName, email: userEmail, phone } = JSON.parse(localStorage.getItem('user'))
   const { Title, Description, houseType, furniture, maintenanace, Price, Area, listedBy, City, Landmark, Bedrooms, parking, floorCount, floorNumber,
-    pictureOne, pictureTwo, pictureThree, mobileNumber } = productDetails
-  // const details = {
-  //   Title, Description, Price, Area, listedBy, City, Landmark, Bedrooms, parking, floorCount, floorNumber,
-  //   pictureOne
-  // }
+    pictureOne, pictureTwo, pictureThree, userName, mobileNumber, email } = productDetails
+  const details = {
+    Title, Description, Price, Area, listedBy, City, Landmark, Bedrooms, parking, floorCount, floorNumber,
+    pictureOne
+  }
   // , pictureTwo, pictureThree
   const { region } = locationDetails
-  // const location = { region }
+  const location = { region }
   const form = new FormData()
 
   if (mobileNumber !== '') {
     form.append('phone_number', mobileNumber)
-  } else {
+  }else{
     form.append('phone_number', phone)
   }
 
@@ -304,7 +301,8 @@ function Sell() {
   const submitProductForm = (e) => {
     e.preventDefault()
     if (formValidation()) {
-      e.target.reset()
+      // e.target.reset()
+      let product = Object.assign(details, location);
       const headers = {
         "Content-Type": "form-data"
       };
@@ -315,13 +313,16 @@ function Sell() {
             payload: result
           })
         ).then(() => {
-          toast.warn("Successfully posted! confirmation mail have send")
+          setDetails({
+            ...productDetails,
+            msg: true
+          })
         }).catch(err => {
           console.log("error")
         }
         )
     } else {
-      toast.warn("All fields are mandatory")
+      alert("not success")
     }
   }
   return (
@@ -332,7 +333,9 @@ function Sell() {
           <div className="col-sm-4">
           </div>
           <div className="col-sm-4">
-            <ToastContainer />
+            {
+              productDetails.msg ? <span className="list-group-item list-group-item-action list-group-item-success">"Successfully posted! confirmation mail have send"</span> : ""
+            }
           </div>
           <div className="col-sm-4">
           </div>
@@ -348,7 +351,6 @@ function Sell() {
             {
               productDetails.formValidation.titleValid.length > 0 ? <span className="text-danger text-right">{productDetails.formValidation.titleValid}</span> : ""
             }
-
             <input type="text" autoComplete="off" className={`form-control ${productDetails.formValidation.titleValid && 'is-invalid'}`} onChange={getInput} placeholder="Enter Title" name="Title" required />
           </div>
           <div>

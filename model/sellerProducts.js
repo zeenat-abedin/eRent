@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize')
 const sequelize = require('../config/db')
-const products = sequelize.define('sellerProduct', {
+const products = sequelize.define('sellerD', {
   userId: Sequelize.TEXT,
   title: Sequelize.TEXT,
   description: Sequelize.TEXT,

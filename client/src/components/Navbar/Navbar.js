@@ -16,7 +16,7 @@ const NavBar = ({ Color, history }) => {
   const [selectedLocation, setLocation] = React.useState('')
   const dispatch = useDispatch()
   async function fetchMyAPI() {
-    await axios.get('/cities/getcities').then(cities => {
+    let response = await axios.get('/cities/getcities').then(cities => {
       dispatch({
         type: GET_CITIES,
         payload: cities
@@ -28,14 +28,15 @@ const NavBar = ({ Color, history }) => {
   }, [])
   const getLocation = (e) => {
     e.preventDefault()
-    let location = e.target.value;
-    localStorage.setItem('location', JSON.stringify(location))
+    let location = e.target.value
+
+    // let new_Location = localStorage.setItem('location', location)
+    // console.log(new_Location)
     setLocation({
       selectedLocation: location
     })
     dispatch(getProductsByLocation(location))
   }
-  let localLocation = JSON.parse(localStorage.getItem('location'))
   return (
     <div>
       <Navbar className='navBar fixed-top' style={{ background: Color ? "transparent" : "linear-gradient(to right bottom, rgb(105, 142, 148), rgb(5, 50, 58))" }} sticky='top' collapseOnSelect expand="lg">
@@ -43,12 +44,10 @@ const NavBar = ({ Color, history }) => {
         {
           fetchedcities ? <Navbar.Brand className="nav-text Navlocation" style={{ "width": "160px" }}>
             <select className="form-control location" onChange={getLocation} name="location">
-              {localLocation ? <option>{localLocation}</option> : <option>Location</option>}
+              {selectedLocation ? '' : <option>Location</option>}
               {
                 fetchedcities.map((data, index) => {
-                  return <option key={index}>
-                    {data.city}
-                  </option>
+                  return <option key={index} >{data.city}</option>
                 })
               }
             </select>
@@ -58,10 +57,11 @@ const NavBar = ({ Color, history }) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            {/* <Nav.Link className="nav-text" href="#features">Sort</Nav.Link> */}
+            <Nav.Link className="nav-text" href="#features">Sort</Nav.Link>
             {currentUser || localStorage.getItem("user") ? (
               <div className="mr-2">
                 <NavDropdown className="dropDown" title="Profile" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/favorites"><i className="fa fa-bookmark mr-2" aria-hidden="true"></i>Favorites</NavDropdown.Item>
                   <NavDropdown.Item href="/Profile"><i className="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>Profile</NavDropdown.Item>
                   <NavDropdown.Divider />
                   {currentUser || localStorage.getItem("user") ? (

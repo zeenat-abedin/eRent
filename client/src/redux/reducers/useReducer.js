@@ -1,11 +1,20 @@
-import { SET_CURRENT_USER, CLEAR_USER, GET_PRODUCTS, POST_PRODUCT, GET_CITIES, GET_PRODUCTS_BY_LOCATION, USER_PRODUCTS,GET_SINGLE_PRODUCT } from "../actions/actionType";
+import {
+  SET_CURRENT_USER,
+  CLEAR_USER,
+  GET_PRODUCTS,
+  POST_PRODUCT,
+  GET_CITIES,
+  GET_PRODUCTS_BY_LOCATION,
+  GET_SINGLE_PRODUCT,
+  ERROR_MESSAGE
+} from "../actions/actionType";
 
 const INITIAL_STATE = {
   currentUser: null,
   products: null,
   cites: null,
-  userProducts: null,
-  singleProduct: null
+  singleProduct: null,
+  errorMessage: null
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -42,16 +51,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         citiesByLocation: payload.data
-      }
-    case USER_PRODUCTS:
-      return {
-        ...state,
-        userProducts: payload
-      }
+      };
     case GET_SINGLE_PRODUCT:
       return {
         ...state,
         singleProduct: payload
+      };
+    case ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: payload
       };
     default:
       return state;

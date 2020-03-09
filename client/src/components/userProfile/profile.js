@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import Header from '../Navbar/Navbar'
 import ProductDisplay from '../displayProducts/productsdisplay'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,38 +8,6 @@ import UserDetailsFile from './userDetailsProfile'
 import UserProductsFile from './userProducts'
 function Profile() {
   const Products = useSelector(state => state.users.products)
-  const userProducts = useSelector(state => state.users.userProducts)
-  const [userDetails, setUserDetails] = useState(null)
-  let dispatch = useDispatch()
-  let userId = JSON.parse(localStorage.getItem("user")).id
-  let userName = JSON.parse(localStorage.getItem("user")).displayName
-  useEffect(() => {
-    const getProfileDetails = async () => {
-      try {
-        let profileDetails = await axios.get(`/profile/${userId}`)
-        setUserDetails(profileDetails.data[0])
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getProfileDetails()
-  }, [userId])
-  useEffect(() => {
-    const fetchUserProducts = async () => {
-      try {
-        let userProducts = await axios.get(`/profile/sellerproducts/${userId}`)
-        if (userProducts) {
-          dispatch({
-            type: USER_PRODUCTS,
-            payload: userProducts.data
-          })
-        }
-      } catch (err) {
-        console.log("err")
-      }
-    }
-    fetchUserProducts()
-  })
   return (
     <Fragment>
       <Header />
